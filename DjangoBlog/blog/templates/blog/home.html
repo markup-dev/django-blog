@@ -1,38 +1,51 @@
-{% extends "blog/base.html" %}
+{% extends "blog/base.html" %}  <!-- Расширяем базовый шаблон blog/base.html -->
+
 {% block content %}
+  <!-- Цикл по всем постам, переданным в контексте -->
   {% for post in posts %}
     <article class="media content-section">
+      <!-- Изображение профиля автора поста -->
       <img alt="avatar" class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
       <div class="media-body">
         <div class="article-metadata">
+          <!-- Ссылка на все посты автора -->
           <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+          <!-- Дата публикации поста -->
           <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
         </div>
+        <!-- Заголовок поста со ссылкой на его детали -->
         <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+        <!-- Содержимое поста -->
         <p class="article-content">{{ post.content }}</p>
       </div>
     </article>
   {% endfor %}
+
+  <!-- Блок для пагинации -->
   <div class="pagination justify-content-center">
-    {% if is_paginated %}
+    {% if is_paginated %}  <!-- Проверка, есть ли пагинация -->
 
-      {% if page_obj.has_previous %}
-
-        <a class="btn btn-outline-info mb-4 mr-1" href="?page=1">Первая</a>
+      {% if page_obj.has_previous %}  <!-- Если есть предыдущая страница -->
+        <a class="btn btn-outline-info mb-4 mr-1" href="?page=1">Первая</a>  <!-- Ссылка на первую страницу -->
         <a class="btn btn-outline-info mb-4 mr-1" href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+        <!-- Ссылка на предыдущую страницу -->
       {% endif %}
 
+      <!-- Цикл по страницам пагинации -->
       {% for num in page_obj.paginator.page_range %}
         {% if page_obj.number == num %}
-          <a class="btn btn-info mb-4 mr-1" href="?page={{ num }}">{{ num }}</a>
+          <a class="btn btn-info mb-4 mr-1" href="?page={{ num }}">{{ num }}</a>  <!-- Текущая страница -->
         {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
           <a class="btn btn-outline-info mb-4 mr-1" href="?page={{ num }}">{{ num }}</a>
+          <!-- Ссылки на страницы рядом с текущей -->
         {% endif %}
       {% endfor %}
 
-      {% if page_obj.has_next %}
+      {% if page_obj.has_next %}  <!-- Если есть следующая страница -->
         <a class="btn btn-outline-info mb-4 mr-1" href="?page={{ page_obj.next_page_number }}">Следующая</a>
+        <!-- Ссылка на следующую страницу -->
         <a class="btn btn-outline-info mb-4 mr-1" href="?page={{ page_obj.paginator.num_pages }}">Последняя</a>
+        <!-- Ссылка на последнюю страницу -->
       {% endif %}
 
     {% endif %}

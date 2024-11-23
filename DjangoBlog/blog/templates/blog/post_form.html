@@ -1,15 +1,21 @@
-{% extends "blog/base.html" %}
-{% load crispy_forms_filters %}
-{% load crispy_forms_tags %}
+{% extends "blog/base.html" %}  <!-- Расширяем базовый шаблон blog/base.html -->
+
+{% load crispy_forms_filters %}  <!-- Загружаем фильтры для crispy-forms -->
+{% load crispy_forms_tags %}     <!-- Загружаем теги для crispy-forms -->
+
 {% block content %}
   <div class="content-section">
-    <form method="POST">
-      {% csrf_token %}
-      <fieldset class="form-group">
-        <legend class="border-bottom mb-4">Новая запись</legend>
-        {{ form|crispy }}
+    <form method="POST">  <!-- Форма для отправки данных методом POST -->
+      {% csrf_token %}  <!-- Защита от CSRF-атак, добавляя токен в форму -->
+
+      <fieldset class="form-group">  <!-- Группировка элементов формы -->
+        <legend class="border-bottom mb-4">Новая запись</legend>  <!-- Заголовок формы -->
+
+        {{ form|crispy }}  <!-- Отображение формы с использованием crispy-forms для стилизации -->
       </fieldset>
+
       <div class="form-group">
+        <!-- Кнопка для отправки формы -->
         <button class="btn btn-outline-info" type="submit">Сохранить</button>
       </div>
     </form>

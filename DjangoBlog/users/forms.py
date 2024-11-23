@@ -5,6 +5,14 @@ from .models import Profile
 
 
 class UserRegisterForm(UserCreationForm):
+	"""Форма регистрации нового пользователя.
+
+	Атрибуты:
+			email (EmailField): Поле для ввода адреса электронной почты.
+
+	Методы:
+			Meta: Определяет модель и поля для формы.
+	"""
 	email = forms.EmailField()
 
 	class Meta:
@@ -13,6 +21,14 @@ class UserRegisterForm(UserCreationForm):
 
 
 class UserUpdateForm(forms.ModelForm):
+	"""Форма для обновления данных пользователя.
+
+	Атрибуты:
+			email (EmailField): Поле для ввода адреса электронной почты.
+
+	Методы:
+			Meta: Определяет модель и поля для формы.
+	"""
 	email = forms.EmailField()
 
 	class Meta:
@@ -21,6 +37,12 @@ class UserUpdateForm(forms.ModelForm):
 
 
 class ProfileUpdateForm(forms.ModelForm):
+	"""Форма для обновления профиля пользователя.
+
+	Методы:
+			Meta: Определяет модель и поля для формы.
+	"""
+
 	class Meta:
 		model = Profile
 		fields = ['image']

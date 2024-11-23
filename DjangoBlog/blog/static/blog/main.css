@@ -24,9 +24,9 @@ ul {
   background-color: #6699cc;
 }
 
-/*.navbar-nav form{*/
-/*  margin: 0;*/
-/*}*/
+.navbar-nav {
+  text-align: center;
+}
 
 .nav-btn {
   background-color: transparent;
@@ -118,10 +118,11 @@ footer p {
 }
 
 footer a {
-  color: #777
+  color: #777;
+  transition: color .5s;
 }
 
 footer a:hover {
-  color: #777;
+  color: #d8d8d8;
   text-decoration: none;
 }
